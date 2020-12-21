@@ -42,15 +42,15 @@ public class Speedmine extends Module
     
     public Speedmine() {
         super("Speedmine", "Speeds up mining.", Category.PLAYER, true, false, false);
-        this.mode = (Setting<Mode>)this.register(new Setting("Mode", (T)Mode.PACKET));
-        this.damage = (Setting<Float>)this.register(new Setting("Damage", (T)0.7f, (T)0.0f, (T)1.0f, v -> this.mode.getValue() == Mode.DAMAGE));
-        this.webSwitch = (Setting<Boolean>)this.register(new Setting("WebSwitch", (T)false));
-        this.doubleBreak = (Setting<Boolean>)this.register(new Setting("DoubleBreak", (T)false));
-        this.render = (Setting<Boolean>)this.register(new Setting("Render", (T)false));
-        this.box = (Setting<Boolean>)this.register(new Setting("Box", (T)false, v -> this.render.getValue()));
-        this.outline = (Setting<Boolean>)this.register(new Setting("Outline", (T)true, v -> this.render.getValue()));
-        this.boxAlpha = (Setting<Integer>)this.register(new Setting("BoxAlpha", (T)85, (T)0, (T)255, v -> this.box.getValue() && this.render.getValue()));
-        this.lineWidth = (Setting<Float>)this.register(new Setting("Width", (T)1.0f, (T)0.1f, (T)5.0f, v -> this.outline.getValue() && this.render.getValue()));
+        this.mode = (Setting<Mode>)this.register(new Setting("Mode", Mode.PACKET));
+        this.damage = (Setting<Float>)this.register(new Setting("Damage", 0.7f, 0.0f, 1.0f, v -> this.mode.getValue() == Mode.DAMAGE));
+        this.webSwitch = (Setting<Boolean>)this.register(new Setting("WebSwitch", false));
+        this.doubleBreak = (Setting<Boolean>)this.register(new Setting("DoubleBreak", false));
+        this.render = (Setting<Boolean>)this.register(new Setting("Render", false));
+        this.box = (Setting<Boolean>)this.register(new Setting("Box", false, v -> this.render.getValue()));
+        this.outline = (Setting<Boolean>)this.register(new Setting("Outline", true, v -> this.render.getValue()));
+        this.boxAlpha = (Setting<Integer>)this.register(new Setting("BoxAlpha", 85, 0, 255, v -> this.box.getValue() && this.render.getValue()));
+        this.lineWidth = (Setting<Float>)this.register(new Setting("Width", 1.0f, 0.1f, 5.0f, v -> this.outline.getValue() && this.render.getValue()));
         this.timer = new Timer();
         this.setInstance();
     }

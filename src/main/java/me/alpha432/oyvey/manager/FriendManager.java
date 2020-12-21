@@ -60,7 +60,7 @@ public class FriendManager extends Feature
         this.clearSettings();
         this.cleanFriends();
         for (final Friend friend : this.friends) {
-            this.register(new Setting(friend.getUuid().toString(), (T)friend.getUsername()));
+            this.register(new Setting(friend.getUuid().toString(), friend.getUsername()));
         }
     }
     

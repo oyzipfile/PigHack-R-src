@@ -138,7 +138,6 @@ public class ModuleManager extends Feature
         this.modules.add(new NoHitBox());
         this.modules.add(new AutoMinecart());
         this.modules.add(new SelfFill());
-        this.modules.add(new ArrowESP());
     }
     
     public Module getModuleByName(final String name) {
@@ -153,7 +152,7 @@ public class ModuleManager extends Feature
     public <T extends Module> T getModuleByClass(final Class<T> clazz) {
         for (final Module module : this.modules) {
             if (clazz.isInstance(module)) {
-                return (T)module;
+                return module;
             }
         }
         return null;

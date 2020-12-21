@@ -606,11 +606,12 @@ public class AutoCrystal extends Module
         }
         return circleblocks;
     }
-    
+
     private NonNullList<BlockPos> placePostions(final float placeRange) {
-        final NonNullList<BlockPos> positions = (NonNullList<BlockPos>)NonNullList.create();
-        positions.addAll((Collection)getSphere(new BlockPos(Math.floor(AutoCrystal.mc.player.posX), Math.floor(AutoCrystal.mc.player.posY), Math.floor(AutoCrystal.mc.player.posZ)), placeRange, (int)placeRange, false, true, 0).stream().filter(pos -> this.canPlaceCrystal(pos, true)).collect((Collector<? super Object, ?, List<? super Object>>)Collectors.toList()));
+        final NonNullList<BlockPos> positions = NonNullList.create();
+        positions.addAll((Collection<? extends BlockPos>) getSphere(new BlockPos(Math.floor(AutoCrystal.mc.player.posX), Math.floor(AutoCrystal.mc.player.posY), Math.floor(AutoCrystal.mc.player.posZ)), placeRange, (int)placeRange, false, true, 0).stream().filter(pos -> this.canPlaceCrystal(pos, true)).collect(Collectors.toList()));
         return positions;
+
     }
     
     private boolean canPlaceCrystal(final BlockPos blockPos, final boolean specialEntityCheck) {
@@ -625,14 +626,14 @@ public class AutoCrystal extends Module
                     return false;
                 }
                 if (!specialEntityCheck) {
-                    return AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost)).isEmpty() && AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2)).isEmpty();
+                    return AutoCrystal.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost)).isEmpty() && AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2)).isEmpty();
                 }
-                for (final Entity entity : AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost))) {
+                for (final Entity entity : AutoCrystal.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost))) {
                     if (!(entity instanceof EntityEnderCrystal)) {
                         return false;
                     }
                 }
-                for (final Entity entity : AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2))) {
+                for (final Entity entity : AutoCrystal.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost2))) {
                     if (!(entity instanceof EntityEnderCrystal)) {
                         return false;
                     }
@@ -648,7 +649,7 @@ public class AutoCrystal extends Module
                 if (!specialEntityCheck) {
                     return AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost)).isEmpty();
                 }
-                for (final Entity entity : AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost))) {
+                for (final Entity entity : AutoCrystal.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost))) {
                     if (!(entity instanceof EntityEnderCrystal)) {
                         return false;
                     }

@@ -39,7 +39,7 @@ public class ChatModifier extends Module
     @SubscribeEvent
     public void onPacketSend(final PacketEvent.Send event) {
         if (event.getPacket() instanceof CPacketChatMessage) {
-            final String s = event.getPacket().getMessage();
+            final String s = ((CPacketChatMessage) event.getPacket()).getMessage();
             if (s.startsWith(OyVey.commandManager.getPrefix())) {
                 this.check = false;
             }

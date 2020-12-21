@@ -36,7 +36,7 @@ public class OyVeyLoader implements IFMLLoadingPlugin
     }
     
     public void injectData(final Map<String, Object> data) {
-        OyVeyLoader.isObfuscatedEnvironment = data.get("runtimeDeobfuscationEnabled");
+        OyVeyLoader.isObfuscatedEnvironment = (boolean) data.get("runtimeDeobfuscationEnabled");
     }
     
     public String getAccessTransformerClass() {

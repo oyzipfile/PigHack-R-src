@@ -42,9 +42,9 @@ public class HoleFiller extends Module
     
     public HoleFiller() {
         super("HoleFiller", "Fills holes around you.", Category.COMBAT, true, false, true);
-        this.range = (Setting<Integer>)this.register(new Setting("PlaceRange", (T)8, (T)0, (T)10));
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)50, (T)0, (T)250));
-        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", (T)20, (T)8, (T)30));
+        this.range = (Setting<Integer>)this.register(new Setting("PlaceRange", 8, 0, 10));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 50, 0, 250));
+        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", 20, 8, 30));
         this.offTimer = new Timer();
         this.timer = new Timer();
         this.blocksThisTick = 0;

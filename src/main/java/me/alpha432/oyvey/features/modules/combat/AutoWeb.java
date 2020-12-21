@@ -48,14 +48,14 @@ public class AutoWeb extends Module
     
     public AutoWeb() {
         super("AutoWeb", "Traps other players in webs", Category.COMBAT, true, false, false);
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)50, (T)0, (T)250));
-        this.blocksPerPlace = (Setting<Integer>)this.register(new Setting("BlocksPerTick", (T)8, (T)1, (T)30));
-        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", (T)false));
-        this.disable = (Setting<Boolean>)this.register(new Setting("AutoDisable", (T)false));
-        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", (T)true));
-        this.raytrace = (Setting<Boolean>)this.register(new Setting("Raytrace", (T)false));
-        this.lowerbody = (Setting<Boolean>)this.register(new Setting("Feet", (T)true));
-        this.upperBody = (Setting<Boolean>)this.register(new Setting("Face", (T)false));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 50, 0, 250));
+        this.blocksPerPlace = (Setting<Integer>)this.register(new Setting("BlocksPerTick", 8, 1, 30));
+        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", false));
+        this.disable = (Setting<Boolean>)this.register(new Setting("AutoDisable", false));
+        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", true));
+        this.raytrace = (Setting<Boolean>)this.register(new Setting("Raytrace", false));
+        this.lowerbody = (Setting<Boolean>)this.register(new Setting("Feet", true));
+        this.upperBody = (Setting<Boolean>)this.register(new Setting("Face", false));
         this.timer = new Timer();
         this.didPlace = false;
         this.placements = 0;

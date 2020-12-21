@@ -16,9 +16,9 @@ public class NoHitBox extends Module
     
     public NoHitBox() {
         super("NoHitBox", "NoHitBox.", Category.MISC, false, false, false);
-        this.pickaxe = (Setting<Boolean>)this.register(new Setting("Pickaxe", (T)true));
-        this.crystal = (Setting<Boolean>)this.register(new Setting("Crystal", (T)true));
-        this.gapple = (Setting<Boolean>)this.register(new Setting("Gapple", (T)true));
+        this.pickaxe = (Setting<Boolean>)this.register(new Setting("Pickaxe", true));
+        this.crystal = (Setting<Boolean>)this.register(new Setting("Crystal", true));
+        this.gapple = (Setting<Boolean>)this.register(new Setting("Gapple", true));
         this.setInstance();
     }
     

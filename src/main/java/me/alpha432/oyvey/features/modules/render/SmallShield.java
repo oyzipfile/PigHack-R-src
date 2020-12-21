@@ -17,10 +17,10 @@ public class SmallShield extends Module
     
     public SmallShield() {
         super("SmallShield", "Makes you offhand lower.", Category.RENDER, false, false, false);
-        this.offX = (Setting<Float>)this.register(new Setting("OffHandX", (T)0.0f, (T)(-1.0f), (T)1.0f));
-        this.offY = (Setting<Float>)this.register(new Setting("OffHandY", (T)0.0f, (T)(-1.0f), (T)1.0f));
-        this.mainX = (Setting<Float>)this.register(new Setting("MainHandX", (T)0.0f, (T)(-1.0f), (T)1.0f));
-        this.mainY = (Setting<Float>)this.register(new Setting("MainHandY", (T)0.0f, (T)(-1.0f), (T)1.0f));
+        this.offX = (Setting<Float>)this.register(new Setting("OffHandX", 0.0f, (-1.0f), 1.0f));
+        this.offY = (Setting<Float>)this.register(new Setting("OffHandY", 0.0f, (-1.0f), 1.0f));
+        this.mainX = (Setting<Float>)this.register(new Setting("MainHandX", 0.0f, (-1.0f), 1.0f));
+        this.mainY = (Setting<Float>)this.register(new Setting("MainHandY", 0.0f, (-1.0f), 1.0f));
         this.setInstance();
     }
     

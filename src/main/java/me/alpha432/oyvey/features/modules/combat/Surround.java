@@ -50,11 +50,11 @@ public class Surround extends Module
     
     public Surround() {
         super("Surround", "Surrounds you with Obsidian", Category.COMBAT, true, false, false);
-        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", (T)12, (T)1, (T)20));
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)0, (T)0, (T)250));
-        this.noGhost = (Setting<Boolean>)this.register(new Setting("PacketPlace", (T)false));
-        this.center = (Setting<Boolean>)this.register(new Setting("TPCenter", (T)false));
-        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", (T)true));
+        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", 12, 1, 20));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 0, 0, 250));
+        this.noGhost = (Setting<Boolean>)this.register(new Setting("PacketPlace", false));
+        this.center = (Setting<Boolean>)this.register(new Setting("TPCenter", false));
+        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", true));
         this.timer = new Timer();
         this.retryTimer = new Timer();
         this.didPlace = false;

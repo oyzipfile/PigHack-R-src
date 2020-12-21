@@ -25,7 +25,7 @@ public class Criticals extends Module
     
     public Criticals() {
         super("Criticals", "Scores criticals for you", Category.COMBAT, true, false, false);
-        this.packets = (Setting<Integer>)this.register(new Setting("Packets", (T)2, (T)1, (T)4, "Amount of packets you want to send."));
+        this.packets = (Setting<Integer>)this.register(new Setting("Packets", 2, 1, 4, "Amount of packets you want to send."));
         this.timer = new Timer();
         this.resetTimer = false;
     }

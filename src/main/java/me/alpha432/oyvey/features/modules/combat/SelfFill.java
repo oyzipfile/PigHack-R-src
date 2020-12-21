@@ -19,7 +19,7 @@ public class SelfFill extends Module
     
     public SelfFill() {
         super("SelfFill", "SelfFills yourself in a hole.", Category.COMBAT, true, false, true);
-        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", (T)Boolean.FALSE));
+        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", Boolean.FALSE));
     }
     
     @Override

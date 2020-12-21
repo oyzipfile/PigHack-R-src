@@ -27,8 +27,8 @@ public class AutoGG extends Module
     public AutoGG() {
         super("AutoGG", "Sends msg after you kill someone", Category.MISC, true, false, false);
         this.targetedPlayers = null;
-        this.custom = (Setting<String>)this.register(new Setting("Custom", (T)"Nigga-Hack.me"));
-        this.test = (Setting<String>)this.register(new Setting("Test", (T)"null"));
+        this.custom = (Setting<String>)this.register(new Setting("Custom", "Nigga-Hack.me"));
+        this.test = (Setting<String>)this.register(new Setting("Test", "null"));
         this.setInstance();
     }
     

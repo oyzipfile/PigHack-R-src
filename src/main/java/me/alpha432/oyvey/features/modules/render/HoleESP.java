@@ -45,31 +45,31 @@ public class HoleESP extends Module
     
     public HoleESP() {
         super("HoleESP", "Shows safe spots.", Category.RENDER, false, false, false);
-        this.future = (Setting<Boolean>)this.register(new Setting("FutureRender", (T)true));
-        this.fov = (Setting<Boolean>)this.register(new Setting("InFov", (T)true));
-        this.renderOwn = (Setting<Boolean>)this.register(new Setting("RenderOwn", (T)true));
-        this.box = (Setting<Boolean>)this.register(new Setting("Box", (T)true));
-        this.outline = (Setting<Boolean>)this.register(new Setting("Outline", (T)true));
-        this.range = (Setting<Integer>)this.register(new Setting("RangeX", (T)0, (T)0, (T)10));
-        this.rangeY = (Setting<Integer>)this.register(new Setting("RangeY", (T)0, (T)0, (T)10));
-        this.red = (Setting<Integer>)this.register(new Setting("Red", (T)0, (T)0, (T)255));
-        this.green = (Setting<Integer>)this.register(new Setting("Green", (T)255, (T)0, (T)255));
-        this.blue = (Setting<Integer>)this.register(new Setting("Blue", (T)0, (T)0, (T)255));
-        this.alpha = (Setting<Integer>)this.register(new Setting("Alpha", (T)255, (T)0, (T)255));
-        this.boxAlpha = (Setting<Integer>)this.register(new Setting("BoxAlpha", (T)125, (T)0, (T)255));
-        this.lineWidth = (Setting<Float>)this.register(new Setting("LineWidth", (T)1.0f, (T)0.1f, (T)5.0f));
-        this.safeRed = (Setting<Integer>)this.register(new Setting("BedrockRed", (T)0, (T)0, (T)255));
-        this.safeGreen = (Setting<Integer>)this.register(new Setting("BedrockGreen", (T)255, (T)0, (T)255));
-        this.safeBlue = (Setting<Integer>)this.register(new Setting("BedrockBlue", (T)0, (T)0, (T)255));
-        this.safeAlpha = (Setting<Integer>)this.register(new Setting("BedrockAlpha", (T)255, (T)0, (T)255));
-        this.cRed = (Setting<Integer>)this.register(new Setting("OL-Red", (T)0, (T)0, (T)255, v -> this.outline.getValue()));
-        this.cGreen = (Setting<Integer>)this.register(new Setting("OL-Green", (T)0, (T)0, (T)255, v -> this.outline.getValue()));
-        this.cBlue = (Setting<Integer>)this.register(new Setting("OL-Blue", (T)255, (T)0, (T)255, v -> this.outline.getValue()));
-        this.cAlpha = (Setting<Integer>)this.register(new Setting("OL-Alpha", (T)255, (T)0, (T)255, v -> this.outline.getValue()));
-        this.safecRed = (Setting<Integer>)this.register(new Setting("OL-BedrockRed", (T)0, (T)0, (T)255, v -> this.outline.getValue()));
-        this.safecGreen = (Setting<Integer>)this.register(new Setting("OL-BedrockGreen", (T)255, (T)0, (T)255, v -> this.outline.getValue()));
-        this.safecBlue = (Setting<Integer>)this.register(new Setting("OL-BedrockBlue", (T)0, (T)0, (T)255, v -> this.outline.getValue()));
-        this.safecAlpha = (Setting<Integer>)this.register(new Setting("OL-BedrockAlpha", (T)255, (T)0, (T)255, v -> this.outline.getValue()));
+        this.future = (Setting<Boolean>)this.register(new Setting("FutureRender", true));
+        this.fov = (Setting<Boolean>)this.register(new Setting("InFov", true));
+        this.renderOwn = (Setting<Boolean>)this.register(new Setting("RenderOwn", true));
+        this.box = (Setting<Boolean>)this.register(new Setting("Box", true));
+        this.outline = (Setting<Boolean>)this.register(new Setting("Outline", true));
+        this.range = (Setting<Integer>)this.register(new Setting("RangeX", 0, 0, 10));
+        this.rangeY = (Setting<Integer>)this.register(new Setting("RangeY", 0, 0, 10));
+        this.red = (Setting<Integer>)this.register(new Setting("Red", 0, 0, 255));
+        this.green = (Setting<Integer>)this.register(new Setting("Green", 255, 0, 255));
+        this.blue = (Setting<Integer>)this.register(new Setting("Blue", 0, 0, 255));
+        this.alpha = (Setting<Integer>)this.register(new Setting("Alpha", 255, 0, 255));
+        this.boxAlpha = (Setting<Integer>)this.register(new Setting("BoxAlpha", 125, 0, 255));
+        this.lineWidth = (Setting<Float>)this.register(new Setting("LineWidth", 1.0f, 0.1f, 5.0f));
+        this.safeRed = (Setting<Integer>)this.register(new Setting("BedrockRed", 0, 0, 255));
+        this.safeGreen = (Setting<Integer>)this.register(new Setting("BedrockGreen", 255, 0, 255));
+        this.safeBlue = (Setting<Integer>)this.register(new Setting("BedrockBlue", 0, 0, 255));
+        this.safeAlpha = (Setting<Integer>)this.register(new Setting("BedrockAlpha", 255, 0, 255));
+        this.cRed = (Setting<Integer>)this.register(new Setting("OL-Red", 0, 0, 255, v -> this.outline.getValue()));
+        this.cGreen = (Setting<Integer>)this.register(new Setting("OL-Green", 0, 0, 255, v -> this.outline.getValue()));
+        this.cBlue = (Setting<Integer>)this.register(new Setting("OL-Blue", 255, 0, 255, v -> this.outline.getValue()));
+        this.cAlpha = (Setting<Integer>)this.register(new Setting("OL-Alpha", 255, 0, 255, v -> this.outline.getValue()));
+        this.safecRed = (Setting<Integer>)this.register(new Setting("OL-BedrockRed", 0, 0, 255, v -> this.outline.getValue()));
+        this.safecGreen = (Setting<Integer>)this.register(new Setting("OL-BedrockGreen", 255, 0, 255, v -> this.outline.getValue()));
+        this.safecBlue = (Setting<Integer>)this.register(new Setting("OL-BedrockBlue", 0, 0, 255, v -> this.outline.getValue()));
+        this.safecAlpha = (Setting<Integer>)this.register(new Setting("OL-BedrockAlpha", 255, 0, 255, v -> this.outline.getValue()));
         this.setInstance();
     }
     

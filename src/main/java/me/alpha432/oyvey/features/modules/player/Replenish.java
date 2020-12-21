@@ -24,9 +24,9 @@ public class Replenish extends Module
     
     public Replenish() {
         super("Replenish", "Replenishes your hotbar", Category.PLAYER, false, false, false);
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)0, (T)0, (T)10));
-        this.gapStack = (Setting<Integer>)this.register(new Setting("GapStack", (T)1, (T)50, (T)64));
-        this.xpStackAt = (Setting<Integer>)this.register(new Setting("XPStack", (T)1, (T)50, (T)64));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 0, 0, 10));
+        this.gapStack = (Setting<Integer>)this.register(new Setting("GapStack", 1, 50, 64));
+        this.xpStackAt = (Setting<Integer>)this.register(new Setting("XPStack", 1, 50, 64));
         this.timer = new Timer();
         this.Hotbar = new ArrayList<Item>();
     }

@@ -50,12 +50,12 @@ public class AutoTrap extends Module
     
     public AutoTrap() {
         super("AutoTrap", "Traps other players", Category.COMBAT, true, false, false);
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)50, (T)0, (T)250));
-        this.blocksPerPlace = (Setting<Integer>)this.register(new Setting("BlocksPerTick", (T)8, (T)1, (T)30));
-        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", (T)true));
-        this.raytrace = (Setting<Boolean>)this.register(new Setting("Raytrace", (T)false));
-        this.antiScaffold = (Setting<Boolean>)this.register(new Setting("AntiScaffold", (T)false));
-        this.antiStep = (Setting<Boolean>)this.register(new Setting("AntiStep", (T)false));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 50, 0, 250));
+        this.blocksPerPlace = (Setting<Integer>)this.register(new Setting("BlocksPerTick", 8, 1, 30));
+        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", true));
+        this.raytrace = (Setting<Boolean>)this.register(new Setting("Raytrace", false));
+        this.antiScaffold = (Setting<Boolean>)this.register(new Setting("AntiScaffold", false));
+        this.antiStep = (Setting<Boolean>)this.register(new Setting("AntiStep", false));
         this.timer = new Timer();
         this.didPlace = false;
         this.placements = 0;

@@ -43,12 +43,12 @@ public class Selftrap extends Module
     
     public Selftrap() {
         super("Selftrap", "Lure your enemies in!", Category.COMBAT, true, false, true);
-        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", (T)8, (T)1, (T)20));
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)50, (T)0, (T)250));
-        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", (T)true));
-        this.disableTime = (Setting<Integer>)this.register(new Setting("DisableTime", (T)200, (T)50, (T)300));
-        this.disable = (Setting<Boolean>)this.register(new Setting("AutoDisable", (T)true));
-        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", (T)false));
+        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", 8, 1, 20));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 50, 0, 250));
+        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", true));
+        this.disableTime = (Setting<Integer>)this.register(new Setting("DisableTime", 200, 50, 300));
+        this.disable = (Setting<Boolean>)this.register(new Setting("AutoDisable", true));
+        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", false));
         this.offTimer = new Timer();
         this.timer = new Timer();
         this.blocksThisTick = 0;
@@ -124,7 +124,7 @@ public class Selftrap extends Module
                 break;
             }
         }
-        positions.sort(Comparator.comparingDouble(Vec3i::func_177956_o));
+        positions.sort(Comparator.comparingDouble(Vec3i::getY));
         return positions;
     }
     

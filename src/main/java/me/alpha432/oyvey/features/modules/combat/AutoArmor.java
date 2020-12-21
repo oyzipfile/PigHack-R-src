@@ -41,12 +41,12 @@ public class AutoArmor extends Module
     
     public AutoArmor() {
         super("AutoArmor", "Puts Armor on for you.", Category.COMBAT, true, false, false);
-        this.delay = (Setting<Integer>)this.register(new Setting("Delay", (T)50, (T)0, (T)500));
-        this.curse = (Setting<Boolean>)this.register(new Setting("Vanishing", (T)false));
-        this.mendingTakeOff = (Setting<Boolean>)this.register(new Setting("AutoMend", (T)false));
-        this.closestEnemy = (Setting<Integer>)this.register(new Setting("Enemy", (T)8, (T)1, (T)20, v -> this.mendingTakeOff.getValue()));
-        this.repair = (Setting<Integer>)this.register(new Setting("Repair%", (T)80, (T)1, (T)100, v -> this.mendingTakeOff.getValue()));
-        this.actions = (Setting<Integer>)this.register(new Setting("Packets", (T)3, (T)1, (T)12));
+        this.delay = (Setting<Integer>)this.register(new Setting("Delay", 50, 0, 500));
+        this.curse = (Setting<Boolean>)this.register(new Setting("Vanishing", false));
+        this.mendingTakeOff = (Setting<Boolean>)this.register(new Setting("AutoMend", false));
+        this.closestEnemy = (Setting<Integer>)this.register(new Setting("Enemy", 8, 1, 20, v -> this.mendingTakeOff.getValue()));
+        this.repair = (Setting<Integer>)this.register(new Setting("Repair%", 80, 1, 100, v -> this.mendingTakeOff.getValue()));
+        this.actions = (Setting<Integer>)this.register(new Setting("Packets", 3, 1, 12));
         this.timer = new Timer();
         this.taskList = new ConcurrentLinkedQueue<InventoryUtil.Task>();
         this.doneSlots = new ArrayList<Integer>();

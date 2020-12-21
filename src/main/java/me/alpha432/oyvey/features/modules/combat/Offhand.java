@@ -64,12 +64,12 @@ public class Offhand extends Module
     
     public Offhand() {
         super("Offhand", "Allows you to switch up your Offhand.", Category.COMBAT, true, false, false);
-        this.crystal = (Setting<Boolean>)this.register(new Setting("Crystal", (T)true));
-        this.crystalHealth = (Setting<Float>)this.register(new Setting("CrystalHP", (T)13.0f, (T)0.1f, (T)36.0f));
-        this.crystalHoleHealth = (Setting<Float>)this.register(new Setting("CrystalHoleHP", (T)3.5f, (T)0.1f, (T)36.0f));
-        this.gapple = (Setting<Boolean>)this.register(new Setting("Gapple", (T)true));
-        this.armorCheck = (Setting<Boolean>)this.register(new Setting("ArmorCheck", (T)true));
-        this.actions = (Setting<Integer>)this.register(new Setting("Packets", (T)4, (T)1, (T)4));
+        this.crystal = (Setting<Boolean>)this.register(new Setting("Crystal", true));
+        this.crystalHealth = (Setting<Float>)this.register(new Setting("CrystalHP", 13.0f, 0.1f, 36.0f));
+        this.crystalHoleHealth = (Setting<Float>)this.register(new Setting("CrystalHoleHP", 3.5f, 0.1f, 36.0f));
+        this.gapple = (Setting<Boolean>)this.register(new Setting("Gapple", true));
+        this.armorCheck = (Setting<Boolean>)this.register(new Setting("ArmorCheck", true));
+        this.actions = (Setting<Integer>)this.register(new Setting("Packets", 4, 1, 4));
         this.currentMode = Mode2.TOTEMS;
         this.totems = 0;
         this.crystals = 0;
@@ -169,17 +169,17 @@ public class Offhand extends Module
         this.holdingCrystal = (Offhand.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL);
         this.holdingTotem = (Offhand.mc.player.getHeldItemOffhand().getItem() == Items.TOTEM_OF_UNDYING);
         this.holdingGapple = (Offhand.mc.player.getHeldItemOffhand().getItem() == Items.GOLDEN_APPLE);
-        this.totems = Offhand.mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::func_190916_E).sum();
+        this.totems = Offhand.mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::getCount).sum();
         if (this.holdingTotem) {
-            this.totems += Offhand.mc.player.inventory.offHandInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::func_190916_E).sum();
+            this.totems += Offhand.mc.player.inventory.offHandInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::getCount).sum();
         }
-        this.crystals = Offhand.mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.END_CRYSTAL).mapToInt(ItemStack::func_190916_E).sum();
+        this.crystals = Offhand.mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.END_CRYSTAL).mapToInt(ItemStack::getCount).sum();
         if (this.holdingCrystal) {
-            this.crystals += Offhand.mc.player.inventory.offHandInventory.stream().filter(itemStack -> itemStack.getItem() == Items.END_CRYSTAL).mapToInt(ItemStack::func_190916_E).sum();
+            this.crystals += Offhand.mc.player.inventory.offHandInventory.stream().filter(itemStack -> itemStack.getItem() == Items.END_CRYSTAL).mapToInt(ItemStack::getCount).sum();
         }
-        this.gapples = Offhand.mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.GOLDEN_APPLE).mapToInt(ItemStack::func_190916_E).sum();
+        this.gapples = Offhand.mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.GOLDEN_APPLE).mapToInt(ItemStack::getCount).sum();
         if (this.holdingGapple) {
-            this.gapples += Offhand.mc.player.inventory.offHandInventory.stream().filter(itemStack -> itemStack.getItem() == Items.GOLDEN_APPLE).mapToInt(ItemStack::func_190916_E).sum();
+            this.gapples += Offhand.mc.player.inventory.offHandInventory.stream().filter(itemStack -> itemStack.getItem() == Items.GOLDEN_APPLE).mapToInt(ItemStack::getCount).sum();
         }
         this.doSwitch();
     }

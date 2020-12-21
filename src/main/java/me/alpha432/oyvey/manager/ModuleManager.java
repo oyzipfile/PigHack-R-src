@@ -12,17 +12,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import me.alpha432.oyvey.features.gui.OyVeyGui;
 import org.lwjgl.input.Keyboard;
-import java.util.Collection;
+
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 import me.alpha432.oyvey.event.events.Render3DEvent;
 import me.alpha432.oyvey.event.events.Render2DEvent;
-import java.util.function.Consumer;
 import net.minecraftforge.common.MinecraftForge;
 import java.util.Arrays;
-import java.util.Iterator;
-import me.alpha432.oyvey.features.modules.render.ArrowESP;
+
 import me.alpha432.oyvey.features.modules.combat.SelfFill;
 import me.alpha432.oyvey.features.modules.combat.AutoMinecart;
 import me.alpha432.oyvey.features.modules.misc.NoHitBox;

@@ -37,18 +37,18 @@ public class Killaura extends Module
     
     public Killaura() {
         super("Killaura", "Kills aura.", Category.COMBAT, true, false, false);
-        this.range = (Setting<Float>)this.register(new Setting("Range", (T)6.0f, (T)0.1f, (T)7.0f));
-        this.delay = (Setting<Boolean>)this.register(new Setting("HitDelay", (T)true));
-        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", (T)true));
-        this.onlySharp = (Setting<Boolean>)this.register(new Setting("SwordOnly", (T)true));
-        this.raytrace = (Setting<Float>)this.register(new Setting("Raytrace", (T)6.0f, (T)0.1f, (T)7.0f, "Wall Range."));
-        this.players = (Setting<Boolean>)this.register(new Setting("Players", (T)true));
-        this.mobs = (Setting<Boolean>)this.register(new Setting("Mobs", (T)false));
-        this.animals = (Setting<Boolean>)this.register(new Setting("Animals", (T)false));
-        this.vehicles = (Setting<Boolean>)this.register(new Setting("Entities", (T)false));
-        this.projectiles = (Setting<Boolean>)this.register(new Setting("Projectiles", (T)false));
-        this.tps = (Setting<Boolean>)this.register(new Setting("TpsSync", (T)true));
-        this.packet = (Setting<Boolean>)this.register(new Setting("Packet", (T)false));
+        this.range = (Setting<Float>)this.register(new Setting("Range", 6.0f, 0.1f, 7.0f));
+        this.delay = (Setting<Boolean>)this.register(new Setting("HitDelay", true));
+        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", true));
+        this.onlySharp = (Setting<Boolean>)this.register(new Setting("SwordOnly", true));
+        this.raytrace = (Setting<Float>)this.register(new Setting("Raytrace", 6.0f, 0.1f, 7.0f, "Wall Range."));
+        this.players = (Setting<Boolean>)this.register(new Setting("Players", true));
+        this.mobs = (Setting<Boolean>)this.register(new Setting("Mobs", false));
+        this.animals = (Setting<Boolean>)this.register(new Setting("Animals", false));
+        this.vehicles = (Setting<Boolean>)this.register(new Setting("Entities", false));
+        this.projectiles = (Setting<Boolean>)this.register(new Setting("Projectiles", false));
+        this.tps = (Setting<Boolean>)this.register(new Setting("TpsSync", true));
+        this.packet = (Setting<Boolean>)this.register(new Setting("Packet", false));
         this.timer = new Timer();
     }
     

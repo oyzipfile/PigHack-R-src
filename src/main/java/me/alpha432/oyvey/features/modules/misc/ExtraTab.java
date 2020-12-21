@@ -19,7 +19,7 @@ public class ExtraTab extends Module
     
     public ExtraTab() {
         super("ExtraTab", "Extends Tab.", Category.MISC, false, false, false);
-        this.size = (Setting<Integer>)this.register(new Setting("Size", (T)250, (T)1, (T)1000));
+        this.size = (Setting<Integer>)this.register(new Setting("Size", 250, 1, 1000));
         this.setInstance();
     }
     

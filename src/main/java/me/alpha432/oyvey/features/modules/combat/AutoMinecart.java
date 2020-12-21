@@ -43,12 +43,12 @@ public class AutoMinecart extends Module
     
     public AutoMinecart() {
         super("AutoMinecart", "Places and explodes minecarts on other players.", Category.COMBAT, true, false, false);
-        this.minHP = (Setting<Float>)this.register(new Setting("MinHP", (T)4.0f, (T)0.0f, (T)36.0f));
-        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", (T)1, (T)1, (T)4));
-        this.delay = (Setting<Integer>)this.register(new Setting("Carts", (T)20, (T)0, (T)50));
-        this.web = (Setting<Boolean>)this.register(new Setting("Web", (T)Boolean.FALSE));
-        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", (T)Boolean.FALSE));
-        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", (T)Boolean.FALSE));
+        this.minHP = (Setting<Float>)this.register(new Setting("MinHP", 4.0f, 0.0f, 36.0f));
+        this.blocksPerTick = (Setting<Integer>)this.register(new Setting("BlocksPerTick", 1, 1, 4));
+        this.delay = (Setting<Integer>)this.register(new Setting("Carts", 20, 0, 50));
+        this.web = (Setting<Boolean>)this.register(new Setting("Web", Boolean.FALSE));
+        this.rotate = (Setting<Boolean>)this.register(new Setting("Rotate", Boolean.FALSE));
+        this.packet = (Setting<Boolean>)this.register(new Setting("PacketPlace", Boolean.FALSE));
     }
     
     @Override

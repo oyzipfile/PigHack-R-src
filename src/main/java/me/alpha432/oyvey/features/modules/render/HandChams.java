@@ -18,11 +18,11 @@ public class HandChams extends Module
     
     public HandChams() {
         super("HandChams", "Changes your hand color.", Category.RENDER, false, false, false);
-        this.mode = (Setting<RenderMode>)this.register(new Setting("Mode", (T)RenderMode.SOLID));
-        this.red = (Setting<Integer>)this.register(new Setting("Red", (T)255, (T)0, (T)255));
-        this.green = (Setting<Integer>)this.register(new Setting("Green", (T)0, (T)0, (T)255));
-        this.blue = (Setting<Integer>)this.register(new Setting("Blue", (T)0, (T)0, (T)255));
-        this.alpha = (Setting<Integer>)this.register(new Setting("Alpha", (T)240, (T)0, (T)255));
+        this.mode = (Setting<RenderMode>)this.register(new Setting("Mode", RenderMode.SOLID));
+        this.red = (Setting<Integer>)this.register(new Setting("Red", 255, 0, 255));
+        this.green = (Setting<Integer>)this.register(new Setting("Green", 0, 0, 255));
+        this.blue = (Setting<Integer>)this.register(new Setting("Blue", 0, 0, 255));
+        this.alpha = (Setting<Integer>)this.register(new Setting("Alpha", 240, 0, 255));
         this.setInstance();
     }
     

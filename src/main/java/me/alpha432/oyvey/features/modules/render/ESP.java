@@ -37,15 +37,15 @@ public class ESP extends Module
     
     public ESP() {
         super("ESP", "Renders a nice ESP.", Category.RENDER, false, false, false);
-        this.items = (Setting<Boolean>)this.register(new Setting("Items", (T)false));
-        this.xporbs = (Setting<Boolean>)this.register(new Setting("XpOrbs", (T)false));
-        this.xpbottles = (Setting<Boolean>)this.register(new Setting("XpBottles", (T)false));
-        this.pearl = (Setting<Boolean>)this.register(new Setting("Pearls", (T)false));
-        this.red = (Setting<Integer>)this.register(new Setting("Red", (T)255, (T)0, (T)255));
-        this.green = (Setting<Integer>)this.register(new Setting("Green", (T)255, (T)0, (T)255));
-        this.blue = (Setting<Integer>)this.register(new Setting("Blue", (T)255, (T)0, (T)255));
-        this.boxAlpha = (Setting<Integer>)this.register(new Setting("BoxAlpha", (T)120, (T)0, (T)255));
-        this.alpha = (Setting<Integer>)this.register(new Setting("Alpha", (T)255, (T)0, (T)255));
+        this.items = (Setting<Boolean>)this.register(new Setting("Items", false));
+        this.xporbs = (Setting<Boolean>)this.register(new Setting("XpOrbs", false));
+        this.xpbottles = (Setting<Boolean>)this.register(new Setting("XpBottles", false));
+        this.pearl = (Setting<Boolean>)this.register(new Setting("Pearls", false));
+        this.red = (Setting<Integer>)this.register(new Setting("Red", 255, 0, 255));
+        this.green = (Setting<Integer>)this.register(new Setting("Green", 255, 0, 255));
+        this.blue = (Setting<Integer>)this.register(new Setting("Blue", 255, 0, 255));
+        this.boxAlpha = (Setting<Integer>)this.register(new Setting("BoxAlpha", 120, 0, 255));
+        this.alpha = (Setting<Integer>)this.register(new Setting("Alpha", 255, 0, 255));
         this.setInstance();
     }
     

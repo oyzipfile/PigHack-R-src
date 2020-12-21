@@ -25,16 +25,16 @@ public class Wireframe extends Module
     
     public Wireframe() {
         super("Wireframe", "Draws a wireframe esp around other players.", Category.RENDER, false, false, false);
-        this.mode = (Setting<RenderMode>)this.register(new Setting("PMode", (T)RenderMode.SOLID));
-        this.cMode = (Setting<RenderMode>)this.register(new Setting("CMode", (T)RenderMode.SOLID));
-        this.players = (Setting<Boolean>)this.register(new Setting("Players", (T)Boolean.FALSE));
-        this.playerModel = (Setting<Boolean>)this.register(new Setting("PlayerModel", (T)Boolean.FALSE));
-        this.crystals = (Setting<Boolean>)this.register(new Setting("Crystals", (T)Boolean.FALSE));
-        this.crystalModel = (Setting<Boolean>)this.register(new Setting("CrystalModel", (T)Boolean.FALSE));
-        this.alpha = (Setting<Float>)this.register(new Setting("PAlpha", (T)255.0f, (T)0.1f, (T)255.0f));
-        this.cAlpha = (Setting<Float>)this.register(new Setting("CAlpha", (T)255.0f, (T)0.1f, (T)255.0f));
-        this.lineWidth = (Setting<Float>)this.register(new Setting("PLineWidth", (T)1.0f, (T)0.1f, (T)3.0f));
-        this.crystalLineWidth = (Setting<Float>)this.register(new Setting("CLineWidth", (T)1.0f, (T)0.1f, (T)3.0f));
+        this.mode = (Setting<RenderMode>)this.register(new Setting("PMode", RenderMode.SOLID));
+        this.cMode = (Setting<RenderMode>)this.register(new Setting("CMode", RenderMode.SOLID));
+        this.players = (Setting<Boolean>)this.register(new Setting("Players", Boolean.FALSE));
+        this.playerModel = (Setting<Boolean>)this.register(new Setting("PlayerModel", Boolean.FALSE));
+        this.crystals = (Setting<Boolean>)this.register(new Setting("Crystals", Boolean.FALSE));
+        this.crystalModel = (Setting<Boolean>)this.register(new Setting("CrystalModel", Boolean.FALSE));
+        this.alpha = (Setting<Float>)this.register(new Setting("PAlpha", 255.0f, 0.1f, 255.0f));
+        this.cAlpha = (Setting<Float>)this.register(new Setting("CAlpha", 255.0f, 0.1f, 255.0f));
+        this.lineWidth = (Setting<Float>)this.register(new Setting("PLineWidth", 1.0f, 0.1f, 3.0f));
+        this.crystalLineWidth = (Setting<Float>)this.register(new Setting("CLineWidth", 1.0f, 0.1f, 3.0f));
         this.setInstance();
     }
     

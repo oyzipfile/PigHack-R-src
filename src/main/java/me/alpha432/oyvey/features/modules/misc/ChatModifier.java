@@ -20,8 +20,8 @@ public class ChatModifier extends Module
     
     public ChatModifier() {
         super("BetterChat", "Modifies your chat", Category.MISC, true, false, false);
-        this.clean = (Setting<Boolean>)this.register(new Setting("NoChatBackground", (T)false, "Cleans your chat"));
-        this.infinite = (Setting<Boolean>)this.register(new Setting("InfiniteChat", (T)false, "Makes your chat infinite."));
+        this.clean = (Setting<Boolean>)this.register(new Setting("NoChatBackground", false, "Cleans your chat"));
+        this.infinite = (Setting<Boolean>)this.register(new Setting("InfiniteChat", false, "Makes your chat infinite."));
         this.setInstance();
     }
     

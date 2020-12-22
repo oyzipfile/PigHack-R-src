@@ -142,7 +142,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                 if (this.renderOutlines) {
                     final boolean flag1 = this.setScoreTeamColor(entity);
                     GlStateManager.enableColorMaterial();
-                    GlStateManager.enableOutlineMode(this.getTeamColor((Entity)entity));
+                    GlStateManager.enableOutlineMode(this.getTeamColor(entity));
                     if (!this.renderMarker) {
                         this.renderModel(entity, f8, f7, f4, f3, f5, f6);
                     }
@@ -237,7 +237,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
             GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
             GlStateManager.enableCull();
             GlStateManager.popMatrix();
-            super.doRender((Entity)entity, x, y, z, entityYaw, partialTicks);
+            super.doRender(entity, x, y, z, entityYaw, partialTicks);
             MinecraftForge.EVENT_BUS.post((Event)new RenderLivingEvent.Post((EntityLivingBase)entity, (RenderLivingBase)RenderLivingBase.class.cast(this), partialTicks, x, y, z));
         }
     }

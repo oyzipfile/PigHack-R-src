@@ -110,10 +110,10 @@ public class MathUtil implements Util
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(final Map<K, V> map, final boolean descending) {
         final List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
         if (descending) {
-            list.sort((Comparator<? super Map.Entry<K, V>>)Map.Entry.comparingByValue(Comparator.reverseOrder()));
+            list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
         }
         else {
-            list.sort((Comparator<? super Map.Entry<K, V>>)Map.Entry.comparingByValue());
+            list.sort(Map.Entry.comparingByValue());
         }
         final Map<K, V> result = new LinkedHashMap<K, V>();
         for (final Map.Entry<K, V> entry : list) {

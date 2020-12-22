@@ -116,58 +116,52 @@ public class EventManager extends Feature
             OyVey.positionManager.restorePosition();
         }
     }
-    
+
     @SubscribeEvent
-    public void onPacketReceive(final PacketEvent.Receive event) {
-        if (event.getStage() != 0) {
-            return;
-        }
-        OyVey.serverManager.onPacketReceived();
-        if (event.getPacket() instanceof SPacketEntityStatus) {
-            final SPacketEntityStatus packet = event.getPacket();
-            if (packet.getOpCode() == 35 && packet.getEntity((World)EventManager.mc.world) instanceof EntityPlayer) {
-                final EntityPlayer player = (EntityPlayer)packet.getEntity((World)EventManager.mc.world);
-                MinecraftForge.EVENT_BUS.post((Event)new TotemPopEvent(player));
-                PopCounter.getInstance().onTotemPop(player);
-            }
-        }
-        if (event.getPacket() instanceof SPacketPlayerListItem && !Feature.fullNullCheck() && this.logoutTimer.passedS(1.0)) {
-            final SPacketPlayerListItem packet2 = event.getPacket();
-            if (!SPacketPlayerListItem.Action.ADD_PLAYER.equals((Object)packet2.getAction()) && !SPacketPlayerListItem.Action.REMOVE_PLAYER.equals((Object)packet2.getAction())) {
-                return;
-            }
-            final UUID id;
-            final SPacketPlayerListItem sPacketPlayerListItem;
-            final String name;
-            final EntityPlayer entity;
-            String logoutName;
-            packet2.getEntries().stream().filter(Objects::nonNull).filter(data -> !Strings.isNullOrEmpty(data.getProfile().getName()) || data.getProfile().getId() != null).forEach(data -> {
-                id = data.getProfile().getId();
-                switch (sPacketPlayerListItem.getAction()) {
-                    case ADD_PLAYER: {
-                        name = data.getProfile().getName();
-                        MinecraftForge.EVENT_BUS.post((Event)new ConnectionEvent(0, id, name));
-                        break;
-                    }
-                    case REMOVE_PLAYER: {
-                        entity = EventManager.mc.world.getPlayerEntityByUUID(id);
-                        if (entity != null) {
-                            logoutName = entity.getName();
-                            MinecraftForge.EVENT_BUS.post((Event)new ConnectionEvent(1, entity, id, logoutName));
-                            break;
-                        }
-                        else {
-                            MinecraftForge.EVENT_BUS.post((Event)new ConnectionEvent(2, id, null));
-                            break;
-                        }
-                        break;
-                    }
+    public void onPacketReceive(PacketEvent.Receive event) {
+        if (event.getStage() == 0) {
+            OyVey.serverManager.onPacketReceived();
+            if (event.getPacket() instanceof SPacketEntityStatus) {
+                SPacketEntityStatus packet = (SPacketEntityStatus)event.getPacket();
+                if (packet.getOpCode() == 35 && packet.getEntity(mc.world) instanceof EntityPlayer) {
+                    EntityPlayer player = (EntityPlayer)packet.getEntity(mc.world);
+                    MinecraftForge.EVENT_BUS.post(new TotemPopEvent(player));
+                    PopCounter.getInstance().onTotemPop(player);
                 }
-                return;
-            });
-        }
-        if (event.getPacket() instanceof SPacketTimeUpdate) {
-            OyVey.serverManager.update();
+            }
+
+            if (event.getPacket() instanceof SPacketPlayerListItem && !fullNullCheck() && this.logoutTimer.passedS(1.0D)) {
+                SPacketPlayerListItem packet = event.getPacket();
+                if (!SPacketPlayerListItem.Action.ADD_PLAYER.equals(packet.getAction()) && !SPacketPlayerListItem.Action.REMOVE_PLAYER.equals(packet.getAction())) {
+                    return;
+                }
+
+                packet.getEntries().stream().filter(Objects::nonNull).filter((data) -> {
+                    return !Strings.isNullOrEmpty(data.getProfile().getName()) || data.getProfile().getId() != null;
+                }).forEach((data) -> {
+                    UUID id = data.getProfile().getId();
+                    switch(packet.getAction()) {
+                        case ADD_PLAYER:
+                            String name = data.getProfile().getName();
+                            MinecraftForge.EVENT_BUS.post(new ConnectionEvent(0, id, name));
+                            break;
+                        case REMOVE_PLAYER:
+                            EntityPlayer entity = mc.world.getPlayerEntityByUUID(id);
+                            if (entity != null) {
+                                String logoutName = entity.getName();
+                                MinecraftForge.EVENT_BUS.post(new ConnectionEvent(1, entity, id, logoutName));
+                            } else {
+                                MinecraftForge.EVENT_BUS.post(new ConnectionEvent(2, id, (String)null));
+                            }
+                    }
+
+                });
+            }
+
+            if (event.getPacket() instanceof SPacketTimeUpdate) {
+                OyVey.serverManager.update();
+            }
+
         }
     }
     

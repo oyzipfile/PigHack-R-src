@@ -51,7 +51,7 @@ public class MixinRenderEnderCrystal extends Render<EntityEnderCrystal>
         f2 += f2 * f2;
         if (this.renderOutlines) {
             GlStateManager.enableColorMaterial();
-            GlStateManager.enableOutlineMode(this.getTeamColor((Entity)entity));
+            GlStateManager.enableOutlineMode(this.getTeamColor(entity));
         }
         if (Wireframe.getINSTANCE().isOn() && Wireframe.getINSTANCE().crystals.getValue()) {
             final float red = ClickGui.getInstance().red.getValue() / 255.0f;
@@ -110,7 +110,7 @@ public class MixinRenderEnderCrystal extends Render<EntityEnderCrystal>
             final double d3 = f5 - entity.posZ;
             RenderDragon.renderCrystalBeams(x + d0, y - 0.3 + f2 * 0.4f + d2, z + d3, partialTicks, (double)f3, (double)f4, (double)f5, entity.innerRotation, entity.posX, entity.posY, entity.posZ);
         }
-        super.doRender((Entity)entity, x, y, z, entityYaw, partialTicks);
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
     
     @Nullable

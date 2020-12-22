@@ -133,7 +133,7 @@ public class ToolTips extends Module
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.enableColorMaterial();
                 GlStateManager.enableLighting();
-                final NonNullList<ItemStack> nonnulllist = (NonNullList<ItemStack>)NonNullList.withSize(27, (Object)ItemStack.EMPTY);
+                final NonNullList<ItemStack> nonnulllist = NonNullList.withSize(27, ItemStack.EMPTY);
                 ItemStackHelper.loadAllItems(blockEntityTag, (NonNullList)nonnulllist);
                 for (int i = 0; i < nonnulllist.size(); ++i) {
                     final int iX = x + i % 9 * 18 + 8;
@@ -150,27 +150,28 @@ public class ToolTips extends Module
             }
         }
     }
-    
-    public static void displayInv(final ItemStack stack, final String name) {
+
+    public static void displayInv(ItemStack stack, String name) {
         try {
-            final Item item = stack.getItem();
-            final TileEntityShulkerBox entityBox = new TileEntityShulkerBox();
-            final ItemShulkerBox shulker = (ItemShulkerBox)item;
+            Item item = stack.getItem();
+            TileEntityShulkerBox entityBox = new TileEntityShulkerBox();
+            ItemShulkerBox shulker = (ItemShulkerBox)item;
             entityBox.blockType = shulker.getBlock();
-            entityBox.setWorld((World)ToolTips.mc.world);
+            entityBox.setWorld(mc.world);
             ItemStackHelper.loadAllItems(stack.getTagCompound().getCompoundTag("BlockEntityTag"), entityBox.items);
             entityBox.readFromNBT(stack.getTagCompound().getCompoundTag("BlockEntityTag"));
-            entityBox.setCustomName((name == null) ? stack.getDisplayName() : name);
-            final IInventory inventory;
-            new Thread(() -> {
+            entityBox.setCustomName(name == null ? stack.getDisplayName() : name);
+            (new Thread(() -> {
                 try {
                     Thread.sleep(200L);
+                } catch (InterruptedException var2) {
                 }
-                catch (InterruptedException ex) {}
-                ToolTips.mc.player.displayGUIChest(inventory);
-            }).start();
+
+                mc.player.displayGUIChest(entityBox);
+            })).start();
+        } catch (Exception var5) {
         }
-        catch (Exception ex2) {}
+
     }
     
     static {

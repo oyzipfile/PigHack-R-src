@@ -34,9 +34,9 @@ public class FileManager extends Feature
     private String[] expandPath(final String fullPath) {
         return fullPath.split(":?\\\\\\\\|\\/");
     }
-    
-    private Stream<String> expandPaths(final String... paths) {
-        return Arrays.stream(paths).map((Function<? super String, ?>)this::expandPath).flatMap((Function<? super Object, ? extends Stream<? extends String>>)Arrays::stream);
+
+    private Stream<String> expandPaths(String ... paths) {
+        return Arrays.stream(paths).map(this::expandPath).flatMap(Arrays::stream);
     }
     
     private Path lookupPath(final Path root, final String... paths) {

@@ -44,6 +44,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.Block;
 import java.util.List;
 
+import static me.alpha432.oyvey.util.EntityUtil.getPlayerPos;
+
 public class BlockUtil implements Util
 {
     public static final List<Block> blackList;
@@ -52,9 +54,9 @@ public class BlockUtil implements Util
     public static List<Block> unSolidBlocks;
     
     public static List<BlockPos> getBlockSphere(final float breakRange, final Class clazz) {
-        final NonNullList<BlockPos> positions = (NonNullList<BlockPos>)NonNullList.create();
-        positions.addAll((Collection)getSphere(EntityUtil.getPlayerPos((EntityPlayer)BlockUtil.mc.player), breakRange, (int)breakRange, false, true, 0).stream().filter(pos -> clazz.isInstance(BlockUtil.mc.world.getBlockState(pos).getBlock())).collect((Collector<? super Object, ?, List<? super Object>>)Collectors.toList()));
-        return (List<BlockPos>)positions;
+        final NonNullList<BlockPos> positions = NonNullList.create();
+        positions.addAll(getSphere(getPlayerPos(BlockUtil.mc.player), breakRange, (int)breakRange, false, true, 0).stream().filter(pos -> clazz.isInstance(BlockUtil.mc.world.getBlockState(pos).getBlock())).collect(Collectors.toList()));
+        return positions;
     }
     
     public static List<EnumFacing> getPossibleSides(final BlockPos pos) {
@@ -101,7 +103,7 @@ public class BlockUtil implements Util
             return -1;
         }
         if (entityCheck) {
-            for (final Entity entity : BlockUtil.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(pos))) {
+            for (final Entity entity : BlockUtil.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(pos))) {
                 if (!(entity instanceof EntityItem) && !(entity instanceof EntityXPOrb)) {
                     return 1;
                 }
@@ -211,8 +213,8 @@ public class BlockUtil implements Util
     }
     
     public static List<BlockPos> possiblePlacePositions(final float placeRange) {
-        final NonNullList<BlockPos> positions = (NonNullList<BlockPos>)NonNullList.create();
-        positions.addAll((Collection)getSphere(EntityUtil.getPlayerPos((EntityPlayer)BlockUtil.mc.player), placeRange, (int)placeRange, false, true, 0).stream().filter((Predicate<? super Object>)BlockUtil::canPlaceCrystal).collect((Collector<? super Object, ?, List<? super Object>>)Collectors.toList()));
+        final NonNullList<BlockPos> positions = NonNullList.create();
+        positions.addAll(getSphere(getPlayerPos(BlockUtil.mc.player), placeRange, (int)placeRange, false, true, 0).stream().filter(BlockUtil::canPlaceCrystal).collect(Collectors.toList()));
         return (List<BlockPos>)positions;
     }
     
@@ -247,8 +249,8 @@ public class BlockUtil implements Util
     }
     
     public static List<BlockPos> possiblePlacePositions(final float placeRange, final boolean specialEntityCheck) {
-        final NonNullList<BlockPos> positions = (NonNullList<BlockPos>)NonNullList.create();
-        positions.addAll((Collection)getSphere(EntityUtil.getPlayerPos((EntityPlayer)BlockUtil.mc.player), placeRange, (int)placeRange, false, true, 0).stream().filter(pos -> canPlaceCrystal(pos, specialEntityCheck)).collect((Collector<? super Object, ?, List<? super Object>>)Collectors.toList()));
+        final NonNullList<BlockPos> positions = NonNullList.create();
+        positions.addAll(getSphere(getPlayerPos(BlockUtil.mc.player), placeRange, (int)placeRange, false, true, 0).stream().filter(pos -> canPlaceCrystal(pos, specialEntityCheck)).collect(Collectors.toList()));
         return (List<BlockPos>)positions;
     }
     
@@ -263,14 +265,14 @@ public class BlockUtil implements Util
                 return false;
             }
             if (!specialEntityCheck) {
-                return BlockUtil.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost)).isEmpty() && BlockUtil.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2)).isEmpty();
+                return BlockUtil.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost)).isEmpty() && BlockUtil.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost2)).isEmpty();
             }
-            for (final Entity entity : BlockUtil.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost))) {
+            for (final Entity entity : BlockUtil.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost))) {
                 if (!(entity instanceof EntityEnderCrystal)) {
                     return false;
                 }
             }
-            for (final Entity entity : BlockUtil.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2))) {
+            for (final Entity entity : BlockUtil.mc.world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(boost2))) {
                 if (!(entity instanceof EntityEnderCrystal)) {
                     return false;
                 }

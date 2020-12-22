@@ -53,7 +53,7 @@ shadowJar {
 
 mixin {
     defaultObfuscationEnv searge
-    add sourceSets.main, "mixin.xanax.refmap.json"
+    add sourceSets.main, "mixin.oyvey.refmap.json"
 }
 
 reobf {
@@ -66,11 +66,11 @@ reobf {
 jar {
     manifest {
         attributes(
-                "MixinConfigs": "mixin.xanax.json",
+                "MixinConfigs": "mixin.oyvey.json",
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder": 0,
                 "FMLCorePluginContainsFMLMod": "true",
-                "FMLCorePlugin": "cat.yoink.xanax.external.EntryPoint",
+                "FMLCorePlugin": "me.alpha432.oyvey.mixin.OyVeyLoader",
                 "ForceLoadAsMod": "true",
                 "FMLAT": "xanax_at.cfg",
         )

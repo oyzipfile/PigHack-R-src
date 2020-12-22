@@ -1,295 +1,349 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
+// Decompiled with: FernFlower
 package me.alpha432.oyvey.manager;
 
-import me.alpha432.oyvey.features.modules.Module;
-import java.util.UUID;
-import java.util.Map;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.InputStreamReader;
-import com.google.gson.JsonParser;
-import java.util.Collection;
-import me.alpha432.oyvey.features.setting.EnumConverter;
-import me.alpha432.oyvey.features.setting.Bind;
-import me.alpha432.oyvey.features.setting.Setting;
 import com.google.gson.Gson;
-import java.nio.file.Path;
-import java.io.Writer;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.nio.file.OpenOption;
-import com.google.gson.JsonElement;
 import com.google.gson.GsonBuilder;
-import java.nio.file.attribute.FileAttribute;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import com.google.gson.JsonObject;
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.util.Iterator;
-import java.io.IOException;
-import me.alpha432.oyvey.OyVey;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.Arrays;
-import java.util.Objects;
-import java.io.File;
-import java.util.List;
-import me.alpha432.oyvey.features.Feature;
+import java.nio.file.attribute.FileAttribute;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.UUID;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import me.alpha432.oyvey.OyVey;
+import me.alpha432.oyvey.features.Feature;
+import me.alpha432.oyvey.features.modules.Module;
+import me.alpha432.oyvey.features.setting.Bind;
+import me.alpha432.oyvey.features.setting.EnumConverter;
+import me.alpha432.oyvey.features.setting.Setting;
 import me.alpha432.oyvey.util.Util;
 
-public class ConfigManager implements Util
-{
-    public ArrayList<Feature> features;
-    public String config;
-    
-    public ConfigManager() {
-        this.features = new ArrayList<Feature>();
-        this.config = "oyvey/config/";
-    }
-    
-    public void loadConfig(final String name) {
-        final List<File> files = Arrays.stream((Object[])Objects.requireNonNull((T[])new File("oyvey").listFiles())).filter(File::isDirectory).collect((Collector<? super Object, ?, List<File>>)Collectors.toList());
+public class ConfigManager implements Util {
+    public ArrayList features = new ArrayList();
+    public String config = "oyvey/config/";
+
+    public void loadConfig(String name) {
+        List files = (List)Arrays.stream(Objects.requireNonNull((new File("oyvey")).listFiles())).filter(File::isDirectory).collect(Collectors.toList());
         if (files.contains(new File("oyvey/" + name + "/"))) {
             this.config = "oyvey/" + name + "/";
-        }
-        else {
+        } else {
             this.config = "oyvey/config/";
         }
+
         OyVey.friendManager.onLoad();
-        for (final Feature feature : this.features) {
+        Iterator var3 = this.features.iterator();
+
+        while(var3.hasNext()) {
+            Feature feature = (Feature)var3.next();
+
             try {
                 this.loadSettings(feature);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException var6) {
+                var6.printStackTrace();
             }
         }
+
         this.saveCurrentConfig();
     }
-    
-    public boolean configExists(final String name) {
-        final List<File> files = Arrays.stream((Object[])Objects.requireNonNull((T[])new File("oyvey").listFiles())).filter(File::isDirectory).collect((Collector<? super Object, ?, List<File>>)Collectors.toList());
+
+    public boolean configExists(String name) {
+        List files = Arrays.stream(Objects.requireNonNull((new File("oyvey")).listFiles())).filter(File::isDirectory).collect(Collectors.toList());
         return files.contains(new File("oyvey/" + name + "/"));
     }
-    
-    public void saveConfig(final String name) {
+
+    public void saveConfig(String name) {
         this.config = "oyvey/" + name + "/";
-        final File path = new File(this.config);
+        File path = new File(this.config);
         if (!path.exists()) {
             path.mkdir();
         }
+
         OyVey.friendManager.saveFriends();
-        for (final Feature feature : this.features) {
+        Iterator var3 = this.features.iterator();
+
+        while(var3.hasNext()) {
+            Feature feature = (Feature)var3.next();
+
             try {
                 this.saveSettings(feature);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException var6) {
+                var6.printStackTrace();
             }
         }
+
         this.saveCurrentConfig();
     }
-    
+
     public void saveCurrentConfig() {
-        final File currentConfig = new File("oyvey/currentconfig.txt");
+        File currentConfig = new File("oyvey/currentconfig.txt");
+
         try {
+            FileWriter writer;
+            String tempConfig;
             if (currentConfig.exists()) {
-                final FileWriter writer = new FileWriter(currentConfig);
-                final String tempConfig = this.config.replaceAll("/", "");
+                writer = new FileWriter(currentConfig);
+                tempConfig = this.config.replaceAll("/", "");
                 writer.write(tempConfig.replaceAll("oyvey", ""));
                 writer.close();
-            }
-            else {
+            } else {
                 currentConfig.createNewFile();
-                final FileWriter writer = new FileWriter(currentConfig);
-                final String tempConfig = this.config.replaceAll("/", "");
+                writer = new FileWriter(currentConfig);
+                tempConfig = this.config.replaceAll("/", "");
                 writer.write(tempConfig.replaceAll("oyvey", ""));
                 writer.close();
             }
+        } catch (Exception var4) {
+            var4.printStackTrace();
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
-    
+
     public String loadCurrentConfig() {
-        final File currentConfig = new File("oyvey/currentconfig.txt");
+        File currentConfig = new File("oyvey/currentconfig.txt");
         String name = "config";
+
         try {
             if (currentConfig.exists()) {
-                final Scanner reader = new Scanner(currentConfig);
-                while (reader.hasNextLine()) {
-                    name = reader.nextLine();
+                Scanner reader;
+                for(reader = new Scanner(currentConfig); reader.hasNextLine(); name = reader.nextLine()) {
                 }
+
                 reader.close();
             }
+        } catch (Exception var4) {
+            var4.printStackTrace();
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+
         return name;
     }
-    
-    public void resetConfig(final boolean saveConfig, final String name) {
-        for (final Feature feature : this.features) {
+
+    public void resetConfig(boolean saveConfig, String name) {
+        Iterator var3 = this.features.iterator();
+
+        while(var3.hasNext()) {
+            Feature feature = (Feature)var3.next();
             feature.reset();
         }
+
         if (saveConfig) {
             this.saveConfig(name);
         }
+
     }
-    
-    public void saveSettings(final Feature feature) throws IOException {
-        final JsonObject object = new JsonObject();
-        final File directory = new File(this.config + this.getDirectory(feature));
+
+    public void saveSettings(Feature feature) throws IOException {
+        new JsonObject();
+        File directory = new File(this.config + this.getDirectory(feature));
         if (!directory.exists()) {
             directory.mkdir();
         }
-        final String featureName = this.config + this.getDirectory(feature) + feature.getName() + ".json";
-        final Path outputFile = Paths.get(featureName, new String[0]);
+
+        String featureName = this.config + this.getDirectory(feature) + feature.getName() + ".json";
+        Path outputFile = Paths.get(featureName);
         if (!Files.exists(outputFile, new LinkOption[0])) {
-            Files.createFile(outputFile, (FileAttribute<?>[])new FileAttribute[0]);
+            Files.createFile(outputFile, (FileAttribute[])(new FileAttribute[0]));
         }
-        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        final String json = gson.toJson((JsonElement)this.writeSettings(feature));
-        final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(outputFile, new OpenOption[0])));
+
+        Gson gson = (new GsonBuilder()).setPrettyPrinting().create();
+        String json = gson.toJson(this.writeSettings(feature));
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(outputFile)));
         writer.write(json);
         writer.close();
     }
-    
-    public static void setValueFromJson(final Feature feature, final Setting setting, final JsonElement element) {
-        final String type = setting.getType();
-        switch (type) {
-            case "Boolean": {
-                setting.setValue(element.getAsBoolean());
-            }
-            case "Double": {
-                setting.setValue(element.getAsDouble());
-            }
-            case "Float": {
-                setting.setValue(element.getAsFloat());
-            }
-            case "Integer": {
-                setting.setValue(element.getAsInt());
-            }
-            case "String": {
-                final String str = element.getAsString();
-                setting.setValue(str.replace("_", " "));
-            }
-            case "Bind": {
-                setting.setValue(new Bind.BindConverter().doBackward(element));
-            }
-            case "Enum": {
-                try {
-                    final EnumConverter converter = new EnumConverter(((Enum)setting.getValue()).getClass());
-                    final Enum value = converter.doBackward(element);
-                    setting.setValue((value == null) ? setting.getDefaultValue() : value);
+
+    public static void setValueFromJson(Feature feature, Setting setting, JsonElement element) {
+        String var4 = setting.getType();
+        byte var5 = -1;
+        switch(var4.hashCode()) {
+            case -1808118735:
+                if (var4.equals("String")) {
+                    var5 = 4;
                 }
-                catch (Exception ex) {}
-            }
-            default: {
+                break;
+            case -672261858:
+                if (var4.equals("Integer")) {
+                    var5 = 3;
+                }
+                break;
+            case 2070621:
+                if (var4.equals("Bind")) {
+                    var5 = 5;
+                }
+                break;
+            case 2165025:
+                if (var4.equals("Enum")) {
+                    var5 = 6;
+                }
+                break;
+            case 67973692:
+                if (var4.equals("Float")) {
+                    var5 = 2;
+                }
+                break;
+            case 1729365000:
+                if (var4.equals("Boolean")) {
+                    var5 = 0;
+                }
+                break;
+            case 2052876273:
+                if (var4.equals("Double")) {
+                    var5 = 1;
+                }
+        }
+
+        switch(var5) {
+            case 0:
+                setting.setValue(element.getAsBoolean());
+                return;
+            case 1:
+                setting.setValue(element.getAsDouble());
+                return;
+            case 2:
+                setting.setValue(element.getAsFloat());
+                return;
+            case 3:
+                setting.setValue(element.getAsInt());
+                return;
+            case 4:
+                String str = element.getAsString();
+                setting.setValue(str.replace("_", " "));
+                return;
+            case 5:
+                setting.setValue((new Bind.BindConverter()).doBackward(element));
+                return;
+            case 6:
+                try {
+                    EnumConverter converter = new EnumConverter(((Enum)setting.getValue()).getClass());
+                    Enum value = converter.doBackward(element);
+                    setting.setValue(value == null ? setting.getDefaultValue() : value);
+                } catch (Exception var8) {
+                }
+
+                return;
+            default:
                 OyVey.LOGGER.error("Unknown Setting type for: " + feature.getName() + " : " + setting.getName());
-            }
         }
     }
-    
+
     public void init() {
         this.features.addAll(OyVey.moduleManager.modules);
         this.features.add(OyVey.friendManager);
-        final String name = this.loadCurrentConfig();
+        String name = this.loadCurrentConfig();
         this.loadConfig(name);
         OyVey.LOGGER.info("Config loaded.");
     }
-    
-    private void loadSettings(final Feature feature) throws IOException {
-        final String featureName = this.config + this.getDirectory(feature) + feature.getName() + ".json";
-        final Path featurePath = Paths.get(featureName, new String[0]);
-        if (!Files.exists(featurePath, new LinkOption[0])) {
-            return;
+
+    private void loadSettings(Feature feature) throws IOException {
+        String featureName = this.config + this.getDirectory(feature) + feature.getName() + ".json";
+        Path featurePath = Paths.get(featureName);
+        if (Files.exists(featurePath, new LinkOption[0])) {
+            this.loadPath(featurePath, feature);
         }
-        this.loadPath(featurePath, feature);
     }
-    
-    private void loadPath(final Path path, final Feature feature) throws IOException {
-        final InputStream stream = Files.newInputStream(path, new OpenOption[0]);
+
+    private void loadPath(Path path, Feature feature) throws IOException {
+        InputStream stream = Files.newInputStream(path);
+
         try {
-            loadFile(new JsonParser().parse((Reader)new InputStreamReader(stream)).getAsJsonObject(), feature);
-        }
-        catch (IllegalStateException e) {
+            loadFile((new JsonParser()).parse(new InputStreamReader(stream)).getAsJsonObject(), feature);
+        } catch (IllegalStateException var5) {
             OyVey.LOGGER.error("Bad Config File for: " + feature.getName() + ". Resetting...");
             loadFile(new JsonObject(), feature);
         }
+
         stream.close();
     }
-    
-    private static void loadFile(final JsonObject input, final Feature feature) {
-        for (final Map.Entry<String, JsonElement> entry : input.entrySet()) {
-            final String settingName = entry.getKey();
-            final JsonElement element = entry.getValue();
-            if (feature instanceof FriendManager) {
-                try {
-                    OyVey.friendManager.addFriend(new FriendManager.Friend(element.getAsString(), UUID.fromString(settingName)));
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
-                boolean settingFound = false;
-                for (final Setting setting : feature.getSettings()) {
-                    if (settingName.equals(setting.getName())) {
-                        try {
-                            setValueFromJson(feature, setting, element);
+
+    private static void loadFile(JsonObject input, Feature feature) {
+        Iterator var2 = input.entrySet().iterator();
+
+        while(true) {
+            while(var2.hasNext()) {
+                Entry entry = (Entry)var2.next();
+                String settingName = (String)entry.getKey();
+                JsonElement element = (JsonElement)entry.getValue();
+                if (feature instanceof FriendManager) {
+                    try {
+                        OyVey.friendManager.addFriend(new FriendManager.Friend(element.getAsString(), UUID.fromString(settingName)));
+                    } catch (Exception var10) {
+                        var10.printStackTrace();
+                    }
+                } else {
+                    boolean settingFound = false;
+                    Iterator var7 = feature.getSettings().iterator();
+
+                    while(var7.hasNext()) {
+                        Setting setting = (Setting)var7.next();
+                        if (settingName.equals(setting.getName())) {
+                            try {
+                                setValueFromJson(feature, setting, element);
+                            } catch (Exception var11) {
+                                var11.printStackTrace();
+                            }
+
+                            settingFound = true;
                         }
-                        catch (Exception e2) {
-                            e2.printStackTrace();
-                        }
-                        settingFound = true;
+                    }
+
+                    if (settingFound) {
                     }
                 }
-                if (settingFound) {
-                    continue;
-                }
-                continue;
             }
+
+            return;
         }
     }
-    
-    public JsonObject writeSettings(final Feature feature) {
-        final JsonObject object = new JsonObject();
-        final JsonParser jp = new JsonParser();
-        for (final Setting setting : feature.getSettings()) {
+
+    public JsonObject writeSettings(Feature feature) {
+        JsonObject object = new JsonObject();
+        JsonParser jp = new JsonParser();
+        Iterator var4 = feature.getSettings().iterator();
+
+        while(var4.hasNext()) {
+            Setting setting = (Setting)var4.next();
             if (setting.isEnumSetting()) {
-                final EnumConverter converter = new EnumConverter(setting.getValue().getClass());
-                object.add(setting.getName(), converter.doForward(setting.getValue()));
-            }
-            else {
+                EnumConverter converter = new EnumConverter(((Enum)setting.getValue()).getClass());
+                object.add(setting.getName(), converter.doForward((Enum)setting.getValue()));
+            } else {
                 if (setting.isStringSetting()) {
-                    final String str = setting.getValue();
+                    String str = (String)setting.getValue();
                     setting.setValue(str.replace(" ", "_"));
                 }
+
                 try {
                     object.add(setting.getName(), jp.parse(setting.getValueAsString()));
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception var7) {
+                    var7.printStackTrace();
                 }
             }
         }
+
         return object;
     }
-    
-    public String getDirectory(final Feature feature) {
+
+    public String getDirectory(Feature feature) {
         String directory = "";
         if (feature instanceof Module) {
             directory = directory + ((Module)feature).getCategory().getName() + "/";
         }
+
         return directory;
     }
 }

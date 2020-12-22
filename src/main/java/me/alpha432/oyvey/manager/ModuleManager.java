@@ -148,12 +148,11 @@ public class ModuleManager extends Feature
         }
         return null;
     }
-    
-    public <T extends Module> T getModuleByClass(final Class<T> clazz) {
-        for (final Module module : this.modules) {
-            if (clazz.isInstance(module)) {
-                return module;
-            }
+
+    public <T extends Module> T getModuleByClass(Class<T> clazz) {
+        for (Module module : this.modules) {
+            if (!clazz.isInstance(module)) continue;
+            return (T)module;
         }
         return null;
     }
@@ -224,15 +223,13 @@ public class ModuleManager extends Feature
         }
         return enabledModules;
     }
-    
-    public ArrayList<Module> getModulesByCategory(final Module.Category category) {
-        final ArrayList<Module> modulesCategory = new ArrayList<Module>();
-        final ArrayList<Module> list;
+
+    public ArrayList<Module> getModulesByCategory(Module.Category category) {
+        ArrayList<Module> modulesCategory = new ArrayList<Module>();
         this.modules.forEach(module -> {
             if (module.getCategory() == category) {
-                list.add(module);
+                modulesCategory.add(module);
             }
-            return;
         });
         return modulesCategory;
     }
@@ -263,7 +260,7 @@ public class ModuleManager extends Feature
     }
     
     public void sortModules(final boolean reverse) {
-        this.sortedModules = this.getEnabledModules().stream().filter(Module::isDrawn).sorted(Comparator.comparing(module -> this.renderer.getStringWidth(module.getFullArrayString()) * (reverse ? -1 : 1))).collect((Collector<? super Object, ?, List<Module>>)Collectors.toList());
+        this.sortedModules = this.getEnabledModules().stream().filter(Module::isDrawn).sorted(Comparator.comparing(module -> this.renderer.getStringWidth(module.getFullArrayString()) * (reverse ? -1 : 1))).collect(Collectors.toList());
     }
     
     public void sortModulesABC() {
